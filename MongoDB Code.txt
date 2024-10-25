@@ -1,0 +1,20 @@
+Dataset imported using MongoDB Compass
+
+#recieve all instances of windspeed being greater than 50kph
+{
+  wind_kph: {
+    $gt: 50
+  }
+}
+
+#Find top 3 highest instances of temperature
+{
+    "$sort": {
+      "temperature_celsius": -1
+    }
+  },
+  {
+    "$limit": 3
+  }
+
+#End of mongoDB Queries
