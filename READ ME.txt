@@ -1,7 +1,7 @@
 Hugh Plunkett - 23312173 - Programming for AI - CA
 
 The repository:
-Should include X files
+Should include X files:
 CSV file "GlobalWeatherRepository" downloaded from Kaggle
 CSV file "cleaned_data" output from task 2
 CSV file output from Kafka task 4
