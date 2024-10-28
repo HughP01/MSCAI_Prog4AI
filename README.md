@@ -1,4 +1,4 @@
-Hugh Plunkett - 23312173 - Programming for AI - CA \
+Hugh Plunkett - 23312173 - Programming for AI - CA 
 
 About the repository: \
 CSV file "GlobalWeatherRepository" downloaded from Kaggle \ 
