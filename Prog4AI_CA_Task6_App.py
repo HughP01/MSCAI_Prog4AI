@@ -3,7 +3,7 @@
 
 # In[32]:
 
-
+from kafka import KafkaConsumer
 import streamlit as st
 import pandas as pd
 import requests
@@ -37,19 +37,16 @@ if section == "Data Dashboard":
 
     df = load_data()
 
-    # Add filters for date, region, or other relevant metrics
+    
     if not df.empty:
         # Example: Filter by Region
         region_options = df['location_name'].unique()
         selected_region = st.selectbox("Select Region", options=region_options)
 
-        # Apply the region filter
         filtered_data = df[df['location_name'] == selected_region]
 
         # Display the filtered data
         st.write("Filtered Data", filtered_data)
-
-        # Plot a sample static chart
         st.subheader("Temperature vs. Humidity")
         fig = px.scatter(filtered_data, x="temperature_celsius", y="humidity", color="location_name")
         st.plotly_chart(fig)
@@ -63,10 +60,36 @@ if section == "Data Dashboard":
 elif section == "Live Data Updates":
     st.title("Live Weather Data Updates")
 
+    
+
+    KAFKA_BROKER = "localhost:9092" 
+    TOPIC_NAME = "csv_data_topic"
+
+    #Kafka consumer
+    consumer = KafkaConsumer(
+    TOPIC_NAME,
+    bootstrap_servers=[KAFKA_BROKER],
+    auto_offset_reset="earliest",
+    enable_auto_commit=True,
+    group_id="streamlit-consumer",
+    value_deserializer=lambda x: json.loads(x.decode("utf-8"))
+    )
+
+
     st_autorefresh(interval=1000)  # Refresh every sec
 
     
-    plot_placeholder = st.empty()
+    data = []
+
+    # Stream data from Kafka
+    for message in consumer:
+        row = message.value
+        data.append(row)
+
+         # Display the latest row in Streamlit as a table
+        if data:
+            df = pd.DataFrame(data)
+            st.write(df.tail(10))
 
     
     
