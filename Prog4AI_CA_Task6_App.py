@@ -58,6 +58,21 @@ if section == "Data Dashboard":
 
 #Live updates
 elif section == "Live Data Updates":
+
+    PRODUCER_API_URL = "http://localhost:5000/send-data"
+
+    # Trigger data sending at the start of the "Live Data Updates" section
+    start_row = 0
+    end_row = 100  # Adjust as needed for your data size
+
+    # Request data from the producer endpoint
+    response = requests.post(PRODUCER_API_URL, params={"start": start_row, "end": end_row})
+    if response.status_code == 200:
+        st.write("Data stream started successfully.")
+    else:
+        st.error(f"Failed to start data stream: {response.json()}")
+
+
     st.title("Live Weather Data Updates")
 
     
@@ -80,7 +95,7 @@ elif section == "Live Data Updates":
 
     
     data = []
-
+    st.write("Most recent data streamed from Kafka in real-time.")
     # Stream data from Kafka
     for message in consumer:
         row = message.value
