@@ -63,7 +63,7 @@ elif section == "Live Data Updates":
 
     # Trigger data sending at the start of the "Live Data Updates" section
     start_row = 0
-    end_row = 100  # Adjust as needed for your data size
+    end_row = 1000
 
     # Request data from the producer endpoint
     response = requests.post(PRODUCER_API_URL, params={"start": start_row, "end": end_row})
