@@ -15,4 +15,6 @@ py file "Prog4AI_CA_Task6_App" the python code for our streamlit app for Task 6 
 
 
 
-https://mscaiprog4ai-9emcfumj2u3hfxxpxnbctd.streamlit.app Link to streamlit app
+https://mscaiprog4ai-9emcfumj2u3hfxxpxnbctd.streamlit.app Link to streamlit app \
+Page 1 pulls data directly from this github, no extra work needed. \
+Page 2 pulls data from the kafka api so make sure that is running.
